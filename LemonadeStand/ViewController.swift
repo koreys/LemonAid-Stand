@@ -60,11 +60,31 @@ class ViewController: UIViewController {
     //Player Supply Buttons
     @IBAction func addLemonSupplyBtn(sender: AnyObject) {
         println("Add to Lemon Supply Btn Pressed")
+        if playerMoney >= 2 {
+            playerLemons += 1
+            playerMoney -= 2
+            playerLemonsLbl.text = "\(playerLemons)"
+            playerMoneyLbl.text = "\(playerMoney)"
+        }
+        else {
+            println("Player is out of Money")
+            showAlertWithMsg(header: "Oh No...", msg: "Your out of Money 😢")
+        }
         
     }
     
     @IBAction func subtractLemonSupplyBtn(sender: AnyObject) {
         println("Sutract Lemon Supply Btn Pressed")
+        if playerLemons >= 1 {
+            playerLemons -= 1
+            playerMoney += 2
+            playerLemonsLbl.text = "\(playerLemons)"
+            playerMoneyLbl.text = "\(playerMoney)"
+        }
+        else {
+            println("Player has no more lemons to sell back to supplier")
+            showAlertWithMsg(header: "Sorry", msg: "You have no lemons to sell back to the supplier.")
+        }
         
     }
     
@@ -92,7 +112,11 @@ class ViewController: UIViewController {
     }
     
     
-    
+    func showAlertWithMsg(header: String = "Alert", msg: String){
+        var alert = UIAlertController(title: header, message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
     
     
     
