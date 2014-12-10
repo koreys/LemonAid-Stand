@@ -40,10 +40,14 @@ class ViewController: UIViewController {
     
     var todaysLemonadeRatio: Double = 0.0
     
+    @IBOutlet weak var imgWeather: UIImageView!
+    var todaysWeather: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        generateTodaysWeather()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,26 +60,82 @@ class ViewController: UIViewController {
     @IBAction func startDayBtnPressed(sender: AnyObject) {
         println("Start Day Button Pressed")
         
-        //Figure out brew ratio
-        if brewIceCubesCount == brewLemonsCount {
-            todaysLemonadeRatio = 0.5
-            println("Today's brew is equal parts lemons and Ice.")
+        if brewLemonsCount == 0.0 || brewIceCubesCount == 0.0 {
+            showAlertWithMsg(header: "Wait !", msg: "You must have atleast one lemon and 1 ice cube in each brew.")
         }
         else {
+            //Figure out brew ratio
             todaysLemonadeRatio = brewLemonsCount / brewIceCubesCount
             println("Todays brew ration is \(todaysLemonadeRatio)")
+            
+            
+            //Create a random amount of customers between 1 and 10
+            var customerCount: Int = Int(arc4random_uniform(UInt32(10)))
+            if todaysWeather == 0 {
+                //Today is Cold
+                if customerCount > 3 {
+                    customerCount -= 3
+                }
+                else if customerCount > 2 {
+                    customerCount -= 2
+                    
+                }
+                println("Today is cold... Business is slow")
+                
+            }
+            else if todaysWeather == 2 {
+                //Today is warm
+                customerCount += 4
+                println("Today is warm! Extra busy Today")
+            }
+            
+            println("Today we will have \(customerCount + 1) customers")
+            var customers: [Customer] = Factory.createTodaysCustomers(customerCount)
+            
+            //Check to see if we have the right Lemonade for each Customer
+            var todaysWinnings: Int = 0
+            
+            for customer in customers {
+                if customer.likesDilutedLemonade == true {
+                    if todaysLemonadeRatio < 1 {
+                        println("Paying Customer!")
+                        playerMoney += 1
+                        todaysWinnings += 1
+                        playerMoneyLbl.text = "\(playerMoney)"
+                    }
+                }
+                else if customer.likeEqualPartsLemonade == true {
+                    if todaysLemonadeRatio == 1 {
+                        println("Paying Customer!")
+                        playerMoney += 1
+                        todaysWinnings += 1
+                        playerMoneyLbl.text = "\(playerMoney)"
+                    }
+                }
+                else if customer.likesAcidicLemonade == true {
+                    if todaysLemonadeRatio > 1 {
+                        println("Paying Customer!")
+                        playerMoney += 1
+                        todaysWinnings += 1
+                        playerMoneyLbl.text = "\(playerMoney)"
+                    }
+                }
+            }
+            
+            if todaysWinnings > 0 {
+                showAlertWithMsg(header: "Todays Earnings", msg: "Today you had \(customers.count) potential customers. Total earnings for the day was $ \(todaysWinnings)")
+            }
+            else {
+                showAlertWithMsg(header: "Try Again Tommorrow", msg: "Today you had \(customers.count) potential customers. None of them preferred your mixture.")
+            }
+            
+            //Set mixture back to zero
+            brewIceCubesCount = 0.0
+            brewLemonsCount = 0.0
+            brewIceCubesCountLbl.text = "\(brewIceCubesCount)"
+            brewLemonsCountLbl.text = "\(brewLemonsCount)"
+            generateTodaysWeather()
         }
-        
-        //Create a random amount of customers between 1 and 10
-        var customerCount: Int = Int(arc4random_uniform(UInt32(10)))
-        println("Today we will have \(customerCount + 1) customers")
-        var customers: [Customer] = Factory.createTodaysCustomers(customerCount)
-        
-        //Check to see if we have the right Lemonade for each Customer
-        println("Customers array returned with this many customers: \(customers.count)")
-        
-        
-        
         
     
     }
@@ -205,7 +265,21 @@ class ViewController: UIViewController {
     }
     
     
-
+    func generateTodaysWeather() {
+        todaysWeather = Int(arc4random_uniform(UInt32(3)))
+        if todaysWeather == 0 {
+            //Today is Cold
+            imgWeather.image = UIImage(named: "Cold")
+        }
+        else if todaysWeather == 1 {
+            //Today is mild
+            imgWeather.image = UIImage(named: "Mild")
+        }
+        else {
+            //Today is warm
+            imgWeather.image = UIImage(named: "Warm")
+        }
+    }
     
     
     

@@ -340,11 +340,11 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkJ-Dt-5Mg">
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <string key="text">At the end of the day you will either make or lose money. If you don't have enought money to buy new inventory then you lose the game.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="11" y="503" width="352" height="76"/>
+                                    <rect key="frame" x="11" y="503" width="352" height="54"/>
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B4x-zc-MM5">
@@ -353,12 +353,27 @@
                                 <state key="normal" title="Start Day"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
-                                    <rect key="frame" x="106" y="579" width="163" height="53"/>
+                                    <rect key="frame" x="186" y="587" width="163" height="53"/>
                                 </variation>
                                 <connections>
                                     <action selector="startDayBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HgS-vJ-Td4"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Weather:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PyX-IC-3kl">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="35" y="554" width="132" height="21"/>
+                                </variation>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4m6-4y-3Hr">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="64" y="576" width="75" height="64"/>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -387,6 +402,8 @@
                                 <exclude reference="j1F-ag-t4w"/>
                                 <exclude reference="hkJ-Dt-5Mg"/>
                                 <exclude reference="B4x-zc-MM5"/>
+                                <exclude reference="PyX-IC-3kl"/>
+                                <exclude reference="4m6-4y-3Hr"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -415,6 +432,8 @@
                                 <include reference="j1F-ag-t4w"/>
                                 <include reference="hkJ-Dt-5Mg"/>
                                 <include reference="B4x-zc-MM5"/>
+                                <include reference="PyX-IC-3kl"/>
+                                <include reference="4m6-4y-3Hr"/>
                             </mask>
                         </variation>
                     </view>
@@ -422,6 +441,7 @@
                         <outlet property="brewIceCubesCountLbl" destination="HwL-5c-Shk" id="PJM-SA-gmi"/>
                         <outlet property="brewLemonsCountLbl" destination="Ap3-Ij-CCs" id="1eY-ai-H4A"/>
                         <outlet property="iceCubeSupplyLbl" destination="f8l-9q-Qb2" id="Apj-oH-WID"/>
+                        <outlet property="imgWeather" destination="4m6-4y-3Hr" id="FGx-iS-4lr"/>
                         <outlet property="lemonSupplyLbl" destination="g7U-bR-6Cg" id="xcO-Mh-3Vl"/>
                         <outlet property="playerIceCubesLbl" destination="vyA-oG-l0E" id="KHK-iS-qSL"/>
                         <outlet property="playerLemonsLbl" destination="oj2-xp-abw" id="3tZ-NY-eKg"/>
